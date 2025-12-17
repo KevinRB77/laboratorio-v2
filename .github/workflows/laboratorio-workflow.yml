@@ -1,4 +1,4 @@
-name: Workflow de evente con github actions
+name: Workflow de evento con github actions
 
 on:
   push:
@@ -10,9 +10,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps: 
+
+    - name: checkout repo
+      uses: actions/checkout@v4
+
+
     - name: Mostrar informacion del evento
       run: |
         echo "Repositorio: $GITHUB_REPOSITORY"
         echo "Rama: $GITHUB_REF"
         echo "Actor: $GITHUB_ACTOR"
 
+    - name: Leer el archivo json
+      id: read_json
+      run: |
+        VERSION=$(jq -r '.version' release.json)
+        ARTIFACT= $(jq -r '.artifact_name' release.json)
+
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        echo "artifact=$ARTIFACT" >> $GITHUB_OUTPUT
+
+
+    - name: Usar datos de json
+        echo "Version ddetectada $ {{steps.read_json.outputs.version}}"
+        echo "Artifac definido $ {{steps.read_json.outputs.artifact}}"
+
+        
