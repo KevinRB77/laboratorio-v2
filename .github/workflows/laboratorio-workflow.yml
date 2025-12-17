@@ -2,7 +2,7 @@ name: Workflow de evento con github actions
 
 on:
   push:
-    branch:
+    branches:
       - 'feature/**'
 
 jobs:
@@ -24,7 +24,7 @@ jobs:
     - name: Leer el archivo json
       id: read_json
       run: |
-        VERSION=$(jq -r '.version' release.json)
+        VERSION=$(jq -r '.version' release.json) 
         ARTIFACT=$(jq -r '.artifact_name' release.json)
 
         echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -33,6 +33,8 @@ jobs:
 
     - name: Usar datos de json
       run: |  
-        echo "Version ddetectada $ {{steps.read_json.outputs.version}}"
-        echo "Artifac definido $ {{steps.read_json.outputs.artifact}}"
+        echo "Version detectada ${{steps.read_json.outputs.version}}"
+        echo "Artifact definido ${{steps.read_json.outputs.artifact}}"
+
+
 
