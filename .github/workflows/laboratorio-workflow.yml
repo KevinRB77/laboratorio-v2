@@ -32,7 +32,7 @@ jobs:
 
 
     - name: Usar datos de json
+      run: |  
         echo "Version ddetectada $ {{steps.read_json.outputs.version}}"
         echo "Artifac definido $ {{steps.read_json.outputs.artifact}}"
 
-        
