@@ -1,5 +1,5 @@
-name: Workflow de evento con github actions
-
+name: Este sera el workflow numero 
+run-name: "${{GitHub.actor}} eta realizando la prueba para ete pipeline"
 on:
   push:
     branches:
